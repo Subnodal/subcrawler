@@ -1,0 +1,4 @@
+[project]
+name = "subcrawler"
+version = "0.1.0"
+description = "A flexible and extensible web crawler for Subnodal Search."
