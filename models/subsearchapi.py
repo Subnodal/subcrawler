@@ -1,5 +1,5 @@
 import requests
-from typing import List
+from typing import List, Tuple
 from uuid import UUID
 from datetime import datetime
 
@@ -12,10 +12,10 @@ class SubsearchApi:
 
     def ingest_documents(self, documents: List[Document]):
         requests.post(self.base_url + "/documents", json={
-            "documents": map(lambda document: document.serialise(), documents)
+            "documents": list(map(lambda document: document.serialise(), documents))
         })
 
-    def check_document_versions(self, normalised_urls: List[str]):
+    def check_document_versions(self, normalised_urls: List[str]) -> Tuple[List[DocumentVersion], List[str]]:
         response = requests.post(self.base_url + "/document-versions", json={
             "normalised_urls": normalised_urls
         })

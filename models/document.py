@@ -68,11 +68,11 @@ class Document:
         self.has_generative_ai_content = has_generative_ai_content
 
     @property
-    def normalised_url(self):
+    def normalised_url(self) -> str:
         return self.url
 
     @property
-    def ip_region(self):
+    def ip_region(self) -> Optional[str]:
         return None
 
     def serialise(self):
