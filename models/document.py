@@ -79,7 +79,11 @@ class Document:
         return {
             "url": self.url,
             "normalised_url": self.normalised_url,
-            "digest": self.digest,
+            "digest": (
+                self.digest.hex()
+                if self.digest is not None
+                else None
+            ),
             "title": self.title,
             "description": self.description,
             "body": self.body,
