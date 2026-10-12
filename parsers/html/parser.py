@@ -6,11 +6,11 @@ from models.documentparser import DocumentParser
 
 class HtmlDocumentParser(DocumentParser):
     def parse(
-            self,
-            data: bytes,
-            url: str,
-            source_ip_addr: Optional[IPv4Address | IPv6Address] = None
-        ) -> Document:
+        self,
+        data: bytes,
+        url: str,
+        source_ip_addr: Optional[IPv4Address | IPv6Address] = None
+    ) -> Document:
         return Document(
             url=url,
             title="",
