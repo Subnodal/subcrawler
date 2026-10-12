@@ -5,4 +5,4 @@ description = "A flexible and extensible web crawler for Subnodal Search."
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["crawlers", "models", "parsers"]
+include = ["util", "models", "crawlers", "parsers"]

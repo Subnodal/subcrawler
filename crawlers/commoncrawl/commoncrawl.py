@@ -2,6 +2,7 @@ import requests
 from typing import Optional, List
 from datetime import datetime
 
+from util.logger import logger
 from models.crawler import Crawler
 from models.document import Document
 from crawlers.commoncrawl.index import CommonCrawlIndex
@@ -17,6 +18,8 @@ class CommonCrawl(Crawler):
         self.data_base_url = self.DATA_BASE_URL
 
     def get_crawl_indexes(self) -> List[CommonCrawlIndex]:
+        logger.info("Getting crawl indexes from: %s", self.crawl_index_url)
+
         data = requests.get(self.crawl_index_url).json()
         indexes = []
 

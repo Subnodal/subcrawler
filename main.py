@@ -1,4 +1,5 @@
 import argparse
+import logging
 
 from models.subsearchapi import SubsearchApi
 from models.documentsubmitter import DocumentSubmitter
@@ -26,7 +27,15 @@ parser.add_argument(
     default="http://localhost:8000"
 )
 
+parser.add_argument(
+    "-l", "--log-level",
+    help="The minimum importance level to show logs at.",
+    default="INFO"
+)
+
 args = parser.parse_args()
+
+logging.basicConfig(level=args.log_level)
 
 crawler = None
 subsearch_api = SubsearchApi(args.api_url)

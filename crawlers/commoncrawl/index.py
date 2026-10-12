@@ -3,6 +3,7 @@ import gzip
 from typing import List
 from datetime import datetime
 
+from util.logger import logger
 from crawlers.commoncrawl.archive import CommonCrawlArchive
 
 class CommonCrawlIndex:
@@ -19,9 +20,11 @@ class CommonCrawlIndex:
         self.data_base_url = data_base_url
 
     def get_archives(self) -> List[CommonCrawlArchive]:
-        compressed_data = requests.get(
-            f"{self.data_base_url}/crawl-data/{self.id}/warc.paths.gz"
-        ).content
+        url = f"{self.data_base_url}/crawl-data/{self.id}/warc.paths.gz"
+
+        logger.info("Getting archives from index at: %s", url)
+
+        compressed_data = requests.get(url).content
 
         data = gzip.decompress(compressed_data)
         lines = list(map(lambda line: line.decode("utf-8"), data.splitlines()))

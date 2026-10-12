@@ -2,6 +2,7 @@ import requests
 from typing import Optional
 from warcio import ArchiveIterator
 
+from util.logger import logger
 from models.document import Document
 from parsers.html.parser import HtmlDocumentParser
 
@@ -17,8 +18,12 @@ class CommonCrawlArchive:
 
     def fetch_records(self):
         if self._records is None:
+            url = f"{self.data_base_url}/{self.path}"
+
+            logger.info("Fetching archive records from: %s", url)
+
             response = requests.get(
-                f"{self.data_base_url}/{self.path}",
+                url,
                 stream=True
             )
 
