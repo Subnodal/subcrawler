@@ -1,8 +1,9 @@
+from typing import Optional
 from abc import ABC, abstractmethod
 
-from documentsubmitter import DocumentSubmitter
+from models.document import Document
 
 class Crawler(ABC):
     @abstractmethod
-    def crawl_next(self, document_submitter: DocumentSubmitter):
+    def crawl_next(self) -> Optional[Document]:
         pass

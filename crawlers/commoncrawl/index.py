@@ -3,7 +3,7 @@ import gzip
 from typing import List
 from datetime import datetime
 
-from commoncrawl.segment import CommonCrawlSegment
+from crawlers.commoncrawl.archive import CommonCrawlArchive
 
 class CommonCrawlIndex:
     def __init__(
@@ -18,19 +18,19 @@ class CommonCrawlIndex:
         self.end_date = end_date
         self.data_base_url = data_base_url
 
-    def get_segments(self) -> List[CommonCrawlSegment]:
+    def get_archives(self) -> List[CommonCrawlArchive]:
         compressed_data = requests.get(
-            f"{self.data_base_url}/crawl-data/{self.id}/segments/segment.paths.gz"
+            f"{self.data_base_url}/crawl-data/{self.id}/warc.paths.gz"
         ).content
 
         data = gzip.decompress(compressed_data)
-        lines = list(map(str, data.splitlines()))
-        segments = []
+        lines = list(map(lambda line: line.decode("utf-8"), data.splitlines()))
+        archives = []
 
         for line in lines:
-            segments.append(CommonCrawlSegment(
+            archives.append(CommonCrawlArchive(
                 path=line,
                 data_base_url=self.data_base_url
             ))
 
-        return segments
+        return archives

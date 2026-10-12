@@ -1,7 +1,7 @@
 from typing import List
 
-from document import Document
-from subsearchapi import SubsearchApi
+from models.document import Document
+from models.subsearchapi import SubsearchApi
 
 class DocumentSubmitter:
     def __init__(self, subsearch_api: SubsearchApi):

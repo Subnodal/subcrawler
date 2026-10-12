@@ -1,9 +1,9 @@
 import requests
-from typing import List
+from typing import Optional, List
 from datetime import datetime
 
 from models.crawler import Crawler
-from models.documentsubmitter import DocumentSubmitter
+from models.document import Document
 from crawlers.commoncrawl.index import CommonCrawlIndex
 
 class CommonCrawl(Crawler):
@@ -32,5 +32,9 @@ class CommonCrawl(Crawler):
 
         return indexes
 
-    def crawl_next(self, document_submitter: DocumentSubmitter):
-        pass
+    def crawl_next(self) -> Optional[Document]:
+        first_index = self.get_crawl_indexes()[0]
+        first_archive = first_index.get_archives()[0]
+        document = first_archive.get_response_document()
+
+        return document

@@ -3,8 +3,8 @@ from typing import List, Tuple
 from uuid import UUID
 from datetime import datetime
 
-from document import Document
-from documentversion import DocumentVersion
+from models.document import Document
+from models.documentversion import DocumentVersion
 
 class SubsearchApi:
     def __init__(self, base_url: str):
